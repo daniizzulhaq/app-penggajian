@@ -53,7 +53,7 @@
 {{-- Tabel --}}
 <div class="card shadow-sm">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <span><i class="bi bi-plus-circle me-2"></i>Daftar Tunjangan</span>
+        <span><i class="bi bi-gift me-2"></i>Daftar Tunjangan</span>
         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah">
             <i class="bi bi-plus me-1"></i>Tambah Tunjangan
         </button>
@@ -79,7 +79,7 @@
                         <strong>{{ $t->karyawan->nama_lengkap ?? '-' }}</strong>
                         <div class="text-muted small">{{ $t->karyawan->nik ?? '' }}</div>
                     </td>
-                    <td>{{ $t->nama_tunjangan }}</td>
+                    <td>{{ $t->nama }}</td>{{-- fix: nama_tunjangan → nama --}}
                     <td>
                         @if($t->jenis === 'tetap')
                             <span class="badge bg-success bg-opacity-10 text-success">Tetap</span>
@@ -142,11 +142,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Nama Tunjangan <span class="text-danger">*</span></label>
-                        <input type="text" name="nama_tunjangan"
-                               class="form-control @error('nama_tunjangan') is-invalid @enderror"
-                               value="{{ old('nama_tunjangan') }}"
+                        <input type="text" name="nama"
+                               class="form-control @error('nama') is-invalid @enderror"
+                               value="{{ old('nama') }}"
                                placeholder="Contoh: Tunjangan Transport" required maxlength="100">
-                        @error('nama_tunjangan')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Jenis <span class="text-danger">*</span></label>
