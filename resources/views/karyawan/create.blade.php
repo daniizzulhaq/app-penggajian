@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','Tambah Karyawan')
 @section('page-title','Tambah Karyawan Baru')
- 
+
 @section('content')
 <div class="card">
     <div class="card-header"><i class="bi bi-person-plus me-2"></i>Form Tambah Karyawan</div>
@@ -11,7 +11,16 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">NIK <span class="text-danger">*</span></label>
-                    <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" value="{{ old('nik') }}" required>
+                    <input 
+                        type="text" 
+                        name="nik" 
+                        class="form-control @error('nik') is-invalid @enderror" 
+                        value="{{ old('nik') }}" 
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        maxlength="20"
+                        required>
                     @error('nik')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-md-6">
