@@ -30,11 +30,11 @@
 <body>
 <div class="container">
     <div class="header">
-        <h2>💰 SLIP GAJI KARYAWAN</h2>
+        <h2>SLIP GAJI KARYAWAN</h2>
         <p>Periode: {{ $payroll->nama_bulan }} {{ $payroll->tahun }}</p>
         <p>Dicetak: {{ now()->format('d/m/Y H:i') }}</p>
     </div>
- 
+
     <div class="info-row">
         <div class="info-box">
             <label>Nama Karyawan</label>
@@ -49,7 +49,7 @@
             <strong>{{ $payroll->karyawan->jabatan->nama_jabatan }}</strong>
         </div>
     </div>
- 
+
     <div class="info-row">
         <div class="info-box">
             <label>Departemen</label>
@@ -66,13 +66,13 @@
             </span>
         </div>
     </div>
- 
+
     <hr class="separator">
- 
+
     {{-- Rekap Absensi --}}
     <table>
         <tr>
-            <th colspan="4">📅 Rekap Kehadiran</th>
+            <th colspan="4">Rekap Kehadiran</th>
         </tr>
         <tr>
             <td>Hadir</td><td><strong>{{ $payroll->hari_hadir }} hari</strong></td>
@@ -86,7 +86,7 @@
             <td>Total Lembur</td><td colspan="3"><strong>{{ $payroll->total_jam_lembur }} jam</strong></td>
         </tr>
     </table>
- 
+
     {{-- Rincian Gaji --}}
     <table>
         <tr>
@@ -99,34 +99,34 @@
         </tr>
         @foreach($payroll->details->where('tipe','tunjangan') as $d)
         <tr>
-            <td class="text-success">+ {{ $d->keterangan }}</td>
+            <td class="text-success">+ {{ $d->keterangan ?? 'Tunjangan' }}</td>
             <td class="text-right text-success">Rp {{ number_format($d->nominal,0,',','.') }}</td>
         </tr>
         @endforeach
         @foreach($payroll->details->where('tipe','lembur') as $d)
         <tr>
-            <td class="text-success">+ {{ $d->keterangan }}</td>
+            <td class="text-success">+ {{ $d->keterangan ?? 'Lembur' }}</td>
             <td class="text-right text-success">Rp {{ number_format($d->nominal,0,',','.') }}</td>
         </tr>
         @endforeach
         @foreach($payroll->details->where('tipe','potongan') as $d)
         <tr>
-            <td class="text-danger">- {{ $d->keterangan }}</td>
+            <td class="text-danger">- {{ $d->keterangan ?? 'Potongan' }}</td>
             <td class="text-right text-danger">Rp {{ number_format($d->nominal,0,',','.') }}</td>
         </tr>
         @endforeach
         @foreach($payroll->details->where('tipe','alpha') as $d)
         <tr>
-            <td class="text-danger">- {{ $d->keterangan }}</td>
+            <td class="text-danger">- {{ $d->keterangan ?? 'Alpha' }}</td>
             <td class="text-right text-danger">Rp {{ number_format($d->nominal,0,',','.') }}</td>
         </tr>
         @endforeach
         <tr class="total-row">
-            <td>💰 GAJI BERSIH</td>
+            <td>GAJI BERSIH</td>
             <td class="text-right">Rp {{ number_format($payroll->gaji_bersih,0,',','.') }}</td>
         </tr>
     </table>
- 
+
     <div class="footer">
         <p>Slip gaji ini dicetak secara digital oleh Sistem Penggajian Karyawan</p>
         <p>Dokumen ini sah tanpa tanda tangan basah</p>
@@ -134,4 +134,3 @@
 </div>
 </body>
 </html>
- 
